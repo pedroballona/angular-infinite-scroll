@@ -1,8 +1,13 @@
 <div class="wrapper">
-  <app-infinite-scroll [items]="items" (scrolledPastThreshold)="onLoadMore()">
+  <app-infinite-scroll
+    [items]="items"
+    (scrolledPastThreshold)="onLoadMore()"
+    [isLoading]="isLoading"
+    [trackBy]="trackBy"
+  >
     <ng-template appInfiniteScrollItem let-item>
       <div class="item">
-        {{item}}
+        {{ item.name }}
       </div>
     </ng-template>
   </app-infinite-scroll>

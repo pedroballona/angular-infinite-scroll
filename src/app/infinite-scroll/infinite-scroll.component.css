@@ -8,11 +8,6 @@
   overflow-y: auto;
 }
 
-.item {
-  height: 50px;
-  border: 1px solid black;
-}
-
 .loader {
   display: flex;
   justify-content: center;

@@ -6,13 +6,15 @@ import {
   EventEmitter,
   Input,
   NgZone,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { distinctUntilChanged, map, throttleTime } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { InfiniteScrollItemDirective } from './directives/infinite-scroll-item.directive';
 
 @Component({
@@ -20,7 +22,7 @@ import { InfiniteScrollItemDirective } from './directives/infinite-scroll-item.d
   templateUrl: './infinite-scroll.component.html',
   styleUrls: ['./infinite-scroll.component.css'],
 })
-export class InfiniteScrollComponent implements OnInit, AfterContentInit {
+export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChanges {
   @ViewChild('wrapper', { static: true })
   private wrapperElementRef: ElementRef | undefined;
 
@@ -30,9 +32,11 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit {
   @Input() isLoading = false;
 
   @Input()
-  items: unknown[] = [];
+  items: readonly any[] = [];
 
   @Input() percentThreshold = 80;
+
+  @Input() trackBy!: (index:number, item: any) => any;
 
   @Output() scrolledPastThreshold = new EventEmitter<void>();
 
@@ -41,10 +45,16 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit {
   private wrapper!: HTMLElement;
 
   constructor(private ngZone: NgZone) {}
+  
+  ngOnChanges(): void {
+    if (!this.trackBy) {
+      throw new Error('trackBy should be informed.');
+    }
+  }
 
   ngAfterContentInit() {
     if (!this.itemDirective) {
-      throw new Error('Set template');
+      throw new Error('It is necessary to set a ng-template marked with a ');
     }
 
     this.itemTemplate = this.itemDirective.templateRef;
