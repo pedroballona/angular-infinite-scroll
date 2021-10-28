@@ -1,0 +1,12 @@
+<div #wrapper class="wrapper">
+  <div class="item" *ngFor="let item of items">
+    <ng-container
+      [ngTemplateOutlet]="itemTemplate"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-container>
+  </div>
+  <div class="loader">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+</div>
+
