@@ -54,7 +54,7 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChan
 
   ngAfterContentInit() {
     if (!this.itemDirective) {
-      throw new Error('It is necessary to set a ng-template marked with a ');
+      throw new Error('It is necessary to set a ng-template marked with a appInfiniteScrollItem');
     }
 
     this.itemTemplate = this.itemDirective.templateRef;

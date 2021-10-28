@@ -1,8 +1,23 @@
 <div #wrapper class="wrapper">
   <ng-container
     [ngTemplateOutlet]="itemTemplate"
-    [ngTemplateOutletContext]="{ $implicit: item }"
-    *ngFor="let item of items; trackBy: trackBy"
+    [ngTemplateOutletContext]="{
+      $implicit: item,
+      index: index,
+      count: count,
+      first: first,
+      odd: odd,
+      even: even
+    }"
+    *ngFor="
+      let item of items;
+      trackBy: trackBy;
+      let index = index;
+      let count = count;
+      let first = first;
+      let odd = odd;
+      let even = even;
+    "
   ></ng-container>
   <div class="loader" *ngIf="isLoading">
     <mat-spinner [diameter]="40"></mat-spinner>
