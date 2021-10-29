@@ -3,6 +3,9 @@
 This repository shows how to implement a infinite scroll component on angular. The component is implemented in [here](./src/app/infinite-scroll/infinite-scroll.component.ts) and an example of use is shown [here](.src/app/app.component.html)
 
 
+https://user-images.githubusercontent.com/45241329/139448578-3a14cff2-1f2b-4cde-a1de-7a00c6d41549.mp4
+
+
 ## Infinite Scroll Component
 
 ```html
@@ -20,6 +23,8 @@ This repository shows how to implement a infinite scroll component on angular. T
     </ng-template>
 </app-infinite-scroll>
 ```
+
+
 
 ### Propriedades
 
