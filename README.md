@@ -1,6 +1,6 @@
 # angular-infinite-scroll
 
-This repository shows how to implement a infinite scroll component on angular. The component is implemented in [here](./src/app/infinite-scroll/infinite-scroll.component.ts) and an example of use is shown [here](.src/app/app.component.html)
+This repository shows how to implement a infinite scroll component on angular. The component is implemented in [here](./src/app/infinite-scroll/infinite-scroll.component.ts) and an example of use is shown [here](./src/app/app.component.html)
 
 
 ## Infinite Scroll Component
