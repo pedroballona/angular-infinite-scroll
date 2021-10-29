@@ -36,6 +36,8 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit {
 
   @Input() percentThreshold = 80;
 
+  @Input() wrapperClass: string | string[] = '';
+
   @Input() trackBy: (index: number, item: any) => any = () => {
     throw new Error('You should provide a trackBy for this component to work');
   };
