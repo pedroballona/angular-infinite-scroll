@@ -22,7 +22,7 @@ import { InfiniteScrollItemDirective } from './directives/infinite-scroll-item.d
   templateUrl: './infinite-scroll.component.html',
   styleUrls: ['./infinite-scroll.component.css'],
 })
-export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChanges {
+export class InfiniteScrollComponent implements OnInit, AfterContentInit {
   @ViewChild('wrapper', { static: true })
   private wrapperElementRef: ElementRef | undefined;
 
@@ -36,7 +36,9 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChan
 
   @Input() percentThreshold = 80;
 
-  @Input() trackBy!: (index:number, item: any) => any;
+  @Input() trackBy: (index: number, item: any) => any = () => {
+    throw new Error('You should provide a trackBy for this component to work');
+  };
 
   @Output() scrolledPastThreshold = new EventEmitter<void>();
 
@@ -45,14 +47,8 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChan
   private wrapper!: HTMLElement;
 
   constructor(private ngZone: NgZone) {}
-  
-  ngOnChanges(): void {
-    if (!this.trackBy) {
-      throw new Error('trackBy should be informed.');
-    }
-  }
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     if (!this.itemDirective) {
       throw new Error('It is necessary to set a ng-template marked with a appInfiniteScrollItem');
     }
@@ -67,7 +63,7 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChan
       fromEvent(this.wrapper, 'scroll')
         .pipe(
           map(() => this.getScrollPercentage()),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         )
         .subscribe((percentage) => {
           if (percentage >= this.percentThreshold) {
@@ -80,11 +76,7 @@ export class InfiniteScrollComponent implements OnInit, AfterContentInit, OnChan
   }
 
   getScrollPercentage(): number {
-    return (
-      (this.wrapper.scrollTop /
-        (this.wrapper.scrollHeight - this.wrapper.clientHeight)) *
-      100
-    );
+    return (this.wrapper.scrollTop / (this.wrapper.scrollHeight - this.wrapper.clientHeight)) * 100;
   }
 
   scrollToTop(): void {
