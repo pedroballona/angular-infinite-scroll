@@ -26,7 +26,7 @@ https://user-images.githubusercontent.com/45241329/139448578-3a14cff2-1f2b-4cde-
 
 
 
-### Propriedades
+### Properties
 
 
 | Name                    | Type                 | Default Value | Description                                                                                                                                                                                                                                                                          |
